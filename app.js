@@ -1,5 +1,6 @@
 const fs = require('fs');
 // TODO: Require the http module
+const http = require('http')
 
 // TODO: Create a server
 
