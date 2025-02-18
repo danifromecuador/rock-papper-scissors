@@ -70,26 +70,23 @@ function handlePostResponse(request, response){
   });
 }
   */
-const http = require('http');
+const http = require('http')
 
-const items = [
-  { id: 1, name: 'Item 1' },
-  { id: 2, name: 'Item 2' },
-  { id: 3, name: 'Item 3' }
+const data = [
+  { id: 1, name: "John1" },
+  { id: 2, name: "John2" },
+  { id: 3, name: "John3" }
 ]
 
-const myServer = http.createServer((req, res) => {
-  console.log(req.url)
-  if (req.url === "/items") handleGetResponse(res)
-  else res.write('select a valid endpoint like /items')
+const server = http.createServer((req, res) => {
+  if (req.url === '/items') handleGetEndpoint(res)
+  else res.write('select /items endpoint')
   res.end()
 })
 
-const handleGetResponse = (res) => {
+const handleGetEndpoint = (res) => {
   res.setHeader('Content-Type', 'application/json')
-  res.write(JSON.stringify(items))
+  res.write(JSON.stringify(data))
 }
 
-myServer.listen(8080, () => {
-  console.log("server is running on port..."+ myServer.address().port)
-})
+server.listen(8080)
