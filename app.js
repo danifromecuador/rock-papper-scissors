@@ -1,10 +1,13 @@
 const fs = require('fs');
 // TODO: Require the http module
-const http = require('http')
-
+// const http = require('http')
+/*
 // TODO: Create a server
-
+const server = http.createServer((req, res)=>{
   // TODO: Create a url object with request url and host name
+  const url = new URL(request.url, 'http://${request.headers.host}')
+
+})
 
   // TODO: Create a switch statement based on pathname of url
 
@@ -66,3 +69,27 @@ function handlePostResponse(request, response){
     response.end(`You selected ${choice}. ${message}`);
   });
 }
+  */
+const http = require('http');
+
+const items = [
+  { id: 1, name: 'Item 1' },
+  { id: 2, name: 'Item 2' },
+  { id: 3, name: 'Item 3' }
+]
+
+const myServer = http.createServer((req, res) => {
+  console.log(req.url)
+  if (req.url === "/items") handleGetResponse(res)
+  else res.write('select a valid endpoint like /items')
+  res.end()
+})
+
+const handleGetResponse = (res) => {
+  res.setHeader('Content-Type', 'application/json')
+  res.write(JSON.stringify(items))
+}
+
+myServer.listen(8080, () => {
+  console.log("server is running on port..."+ myServer.address().port)
+})
