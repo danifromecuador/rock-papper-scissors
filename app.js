@@ -15,35 +15,25 @@ const server = http.createServer((req, res) => {
       // TODO: Write response header
       res.writeHead(200, { 'Content-Type': 'text/html' })
       const text = fs.createReadStream('./index.html')
+      // TODO: Pipe index.html to response
       text.pipe(res)
       return
     }
+    // TODO: Check if request is POST and if so, run handlePostResponse()
     if (req.method === 'POST') {
       handlePostResponse(req, res)
       return
     }
   }
   if (url.pathname) {
+    // TODO: Write response header
     res.writeHead(404, { 'Content-Type': 'text/html' })
+    // TODO: Pipe 404.html to response
     const text = fs.createReadStream('./404.html')
     text.pipe(res)
     return
   }
 })
-
-
-
-
-
-// TODO: Pipe index.html to response
-
-
-// TODO: Check if request is POST and if so, run handlePostResponse()
-
-// TODO: Write response header
-
-// TODO: Pipe 404.html to response
-
 
 // TODO: Have server listen at port 4001
 server.listen(4001, () => { console.log(`Server is listening at ${server.address().port}`) })
